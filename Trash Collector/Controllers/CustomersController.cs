@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,7 @@ using Trash_Collector.Models;
 
 namespace Trash_Collector.Controllers
 {
+    [Authorize(Roles ="Customer")]
     public class CustomersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -156,5 +159,16 @@ namespace Trash_Collector.Controllers
         {
             return _context.Customers.Any(e => e.CustomerId == id);
         }
+
+        // GET: Change pick up day
+
+         //varuserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier); <-- this finds the user
+        public IActionResult ChangePickUp()
+        {
+
+            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
+            return View();
+        }
+
     }
 }
