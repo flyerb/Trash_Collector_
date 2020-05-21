@@ -25,27 +25,30 @@ namespace Trash_Collector.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            if (customer == null)
+            {
+                return RedirectToAction("Create");
+            }
+
             var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-            var customer = await _context.Customers
-                .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
+            //if (customer == null)
+            //{
+            //    return NotFound();
+            //}
+            //else
+            return View();
         }
 
         // GET: Customers/Create
@@ -64,12 +67,14 @@ namespace Trash_Collector.Controllers
         {
             if (ModelState.IsValid)
             {
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier); 
+                customer.IdentityUserId = userId; 
                 _context.Add(customer);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
-            return View(customer);
+            return RedirectToAction("Index");
         }
 
         // GET: Customers/Edit/5
@@ -162,13 +167,51 @@ namespace Trash_Collector.Controllers
 
         // GET: Change pick up day
 
-         //varuserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier); <-- this finds the user
         public IActionResult ChangePickUp()
         {
+            //find correct customer
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
-            ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            return View(customer);
         }
 
+        //POST: change pick up day
+        [HttpPost] 
+        public IActionResult ChangePickUp(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(customer.weeklyPickupDay);
+                 _context.SaveChanges();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        //GET: Suspend Service
+
+        public IActionResult SuspendService() //this is also a create? does customer need to be passed into every create?
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            return View(customer);
+        }
+
+        //POST: Suspend Service
+
+        [HttpPost]
+        public IActionResult SuspendService(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                var start = customer.suspendPickupStart;
+                //start = _context.Customers.Where(s => s.suspendPickupStart);
+
+                _context.Add(customer.suspendPickupEnd);
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
+
 }
