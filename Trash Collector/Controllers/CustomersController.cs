@@ -34,7 +34,7 @@ namespace Trash_Collector.Controllers
             }
            // _context.Customers.Include(c => c.IdentityUser);
 
-            var applicationDbContext = _context.Customers.Where(c => c.IdentityUserId == userId);
+           var applicationDbContext = _context.Customers.Where(c => c.IdentityUserId == userId);
             return View(await applicationDbContext.ToListAsync());
         }
 

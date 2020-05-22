@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -23,7 +24,7 @@ namespace Trash_Collector.Controllers
         }
 
         // GET: Employees
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -32,14 +33,10 @@ namespace Trash_Collector.Controllers
             {
                 return RedirectToAction("Create");
             }
-            
-            //var employeeZip = _context.Employees.Select(z => z.zipCode).SingleOrDefault();
-            //var customerZip = _context.Customers.Select(z => z.zipCode)();
 
-          // if (employeeZip == customerZip)
-
-                var applicationDbContext = _context.Employees.Where(c => c.IdentityUserId == userId);
-                return View(applicationDbContext.ToList());
+            var customerZip = _context.Customers.Where(z => z.zipCode ==  employee.zipCode);
+               // var applicationDbContext = _context.Employees.Where(c => c.IdentityUserId == userId);
+                return View(customerZip);
                  
         }
 
