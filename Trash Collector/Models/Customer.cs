@@ -37,7 +37,6 @@ namespace Trash_Collector.Models
 
         [Display(Name = "Invoice")]
         public double invoice { get; set; }
-       
 
 
         [ForeignKey("IdentityUser")] 

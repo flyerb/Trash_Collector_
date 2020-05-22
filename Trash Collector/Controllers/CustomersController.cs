@@ -32,8 +32,9 @@ namespace Trash_Collector.Controllers
             {
                 return RedirectToAction("Create");
             }
+           // _context.Customers.Include(c => c.IdentityUser);
 
-            var applicationDbContext = _context.Customers.Include(c => c.IdentityUser);
+            var applicationDbContext = _context.Customers.Where(c => c.IdentityUserId == userId);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -78,18 +79,22 @@ namespace Trash_Collector.Controllers
         }
 
         // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var customer = await _context.Customers.FindAsync(id);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
             if (customer == null)
             {
                 return NotFound();
             }
+
+            //var customer = await _context.Customers.FindAsync(id);
+            //if (customer == null)
+            //{
+            //    return NotFound();
+            //}
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", customer.IdentityUserId);
             return View(customer);
         }
@@ -99,12 +104,12 @@ namespace Trash_Collector.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CustomerId,firstName,lastName,streetAddress,zipCode,weeklyPickupDay,extraPickup,suspendPickupStart,suspendPickupEnd,invoice,IdentityUserId")] Customer customer)
+        public async Task<IActionResult> Edit([Bind("CustomerId,firstName,lastName,streetAddress,zipCode,weeklyPickupDay,extraPickup,suspendPickupStart,suspendPickupEnd,invoice,IdentityUserId")] Customer customer)
         {
-            if (id != customer.CustomerId)
-            {
-                return NotFound();
-            }
+            //if (id != customer.CustomerId)
+            //{
+            //    return NotFound();
+            //}
 
             if (ModelState.IsValid)
             {
@@ -164,54 +169,5 @@ namespace Trash_Collector.Controllers
         {
             return _context.Customers.Any(e => e.CustomerId == id);
         }
-
-        // GET: Change pick up day
-
-        public IActionResult ChangePickUp()
-        {
-            //find correct customer
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-
-            return View(customer);
-        }
-
-        //POST: change pick up day
-        [HttpPost] 
-        public IActionResult ChangePickUp(Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(customer.weeklyPickupDay);
-                 _context.SaveChanges();
-            }
-            return RedirectToAction(nameof(Index));
-        }
-
-
-        //GET: Suspend Service
-
-        public IActionResult SuspendService() //this is also a create? does customer need to be passed into every create?
-        {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
-            return View(customer);
-        }
-
-        //POST: Suspend Service
-
-        [HttpPost]
-        public IActionResult SuspendService(Customer customer)
-        {
-            if (ModelState.IsValid)
-            {
-                var start = customer.suspendPickupStart;
-                //start = _context.Customers.Where(s => s.suspendPickupStart);
-
-                _context.Add(customer.suspendPickupEnd);
-            }
-            return RedirectToAction(nameof(Index));
-        }
     }
-
 }

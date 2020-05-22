@@ -28,20 +28,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.weeklyPickupDay)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.extraPickup)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.suspendPickupStart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.suspendPickupEnd)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.invoice)
             </th>
-                @Html.DisplayNameFor(model => model.IdentityUser) 
-            </th>*@
+            @*<th>
+            @Html.DisplayNameFor(model => model.extraPickup)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.suspendPickupStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.suspendPickupEnd)
+        </th>
+
+            @Html.DisplayNameFor(model => model.IdentityUser)
+        </th>*@
             <th></th>
         </tr>
     </thead>
@@ -62,22 +63,24 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.weeklyPickupDay)
-            @*</td>
-            <td>
-                @Html.DisplayFor(modelItem => item.extraPickup)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.suspendPickupStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.suspendPickupEnd)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.invoice)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
-            </td>*@
+            @*</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.extraPickup)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.suspendPickupStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.suspendPickupEnd)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+        </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |

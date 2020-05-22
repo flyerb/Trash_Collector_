@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +23,24 @@ namespace Trash_Collector.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _context.Employees.Include(e => e.IdentityUser);
-            return View(await applicationDbContext.ToListAsync());
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+
+            if (employee == null)
+            {
+                return RedirectToAction("Create");
+            }
+            
+            //var employeeZip = _context.Employees.Select(z => z.zipCode).SingleOrDefault();
+            //var customerZip = _context.Customers.Select(z => z.zipCode)();
+
+          // if (employeeZip == customerZip)
+
+                var applicationDbContext = _context.Employees.Where(c => c.IdentityUserId == userId);
+                return View(applicationDbContext.ToList());
+                 
         }
 
         // GET: Employees/Details/5
