@@ -21,6 +21,7 @@ namespace Trash_Collector.Models
 
         [Display(Name = "Zip Code")]
         public int zipCode { get; set; }
+
        // public DateTime currentDay { get; set; }
        
 

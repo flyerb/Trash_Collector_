@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Trash_Collector.Data;
 
 namespace Trash_Collector.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200522180231_packageConfirmation")]
+    partial class packageConfirmation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace Trash_Collector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c4c7638d-d675-4d96-8b12-3a6ad1c2b434",
-                            ConcurrencyStamp = "efc2e6bf-4712-449f-beec-83746538cc60",
+                            Id = "3bda0a09-53e0-4082-b04a-729897f8d305",
+                            ConcurrencyStamp = "9b4c2325-7ee1-4447-88c7-1c29a607e057",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "1597a9b9-2571-460b-8aac-937ae04a60ba",
-                            ConcurrencyStamp = "59f054fb-d823-4e52-b527-a30976909473",
+                            Id = "2093451c-a498-457c-84ed-33766d64e5f0",
+                            ConcurrencyStamp = "5cc5d149-32b7-400e-a99d-8ba5c348c0ef",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -253,9 +255,6 @@ namespace Trash_Collector.Data.Migrations
                     b.Property<string>("lastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("pickUpComplete")
-                        .HasColumnType("bit");
-
                     b.Property<string>("streetAddress")
                         .HasColumnType("nvarchar(max)");
 
@@ -293,6 +292,9 @@ namespace Trash_Collector.Data.Migrations
 
                     b.Property<string>("lastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("pickUpComplete")
+                        .HasColumnType("bit");
 
                     b.Property<int>("zipCode")
                         .HasColumnType("int");

@@ -24,7 +24,7 @@ namespace Trash_Collector.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
@@ -35,8 +35,10 @@ namespace Trash_Collector.Controllers
             }
 
             var customerZip = _context.Customers.Where(z => z.zipCode ==  employee.zipCode);
-               // var applicationDbContext = _context.Employees.Where(c => c.IdentityUserId == userId);
-                return View(customerZip);
+             var applicationDbContext = _context.Employees.Where(c => c.IdentityUserId == userId);
+            
+            return View(applicationDbContext.ToList());
+            //return View(customerZip);
                  
         }
 
@@ -80,7 +82,8 @@ namespace Trash_Collector.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
-            return View(employee);
+            return RedirectToAction("Index");
+            //return View(employee);
         }
 
         // GET: Employees/Edit/5

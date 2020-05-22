@@ -23,6 +23,10 @@ namespace Trash_Collector.Models
         [Display(Name = "Zip Code")]
         public int zipCode { get; set; }
 
+
+        [Display(Name = "Pick up Complete")]
+        public bool pickUpComplete { get; set; }
+
         [Display(Name = "Pick Up Day")]
         public string weeklyPickupDay { get; set; }
 
