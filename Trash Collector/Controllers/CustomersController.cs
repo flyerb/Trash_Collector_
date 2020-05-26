@@ -66,6 +66,7 @@ namespace Trash_Collector.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CustomerId,firstName,lastName,streetAddress,zipCode,weeklyPickupDay,extraPickup,suspendPickupStart,suspendPickupEnd,invoice,IdentityUserId")] Customer customer)
         {
+         
             if (ModelState.IsValid)
             {
                 var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier); 

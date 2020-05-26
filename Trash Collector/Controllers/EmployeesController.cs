@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,11 @@ namespace Trash_Collector.Controllers
         }
 
         // GET: Employees
+        //protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        //{
+           
+        //}
+
         public IActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -33,7 +39,7 @@ namespace Trash_Collector.Controllers
             {
                 return RedirectToAction("Create");
             }
-
+           
             var customerZip = _context.Customers.Where(z => z.zipCode ==  employee.zipCode);
             return View(customerZip.ToList());
 

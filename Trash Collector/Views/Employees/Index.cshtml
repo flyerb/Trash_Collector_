@@ -25,6 +25,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.pickUpComplete)
+         
             </th>
             <th></th>
         </tr>
@@ -42,12 +43,12 @@
                 @Html.DisplayFor(modelItem => item.zipCode)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IdentityUser.Id)
+                @Html.DisplayNameFor(model => model.pickUpComplete)
+            <input id="Checkbox1" type="checkbox" />
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.CustomerId">This is where the silly map will go</a> |
+               
             </td>
         </tr>
 }
