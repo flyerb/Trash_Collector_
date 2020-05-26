@@ -35,11 +35,10 @@ namespace Trash_Collector.Controllers
             }
 
             var customerZip = _context.Customers.Where(z => z.zipCode ==  employee.zipCode);
-             var applicationDbContext = _context.Employees.Where(c => c.IdentityUserId == userId);
-            
-            return View(applicationDbContext.ToList());
-            //return View(customerZip);
-                 
+            return View(customerZip.ToList());
+
+            // var applicationDbContext = _context.Employees.Where(c => c.IdentityUserId == userId);
+            // return View(applicationDbContext.ToList());
         }
 
         // GET: Employees/Details/5
@@ -76,14 +75,14 @@ namespace Trash_Collector.Controllers
         public async Task<IActionResult> Create([Bind("EmployeeId,firstName,lastName,zipCode,IdentityUserId")] Employee employee)
         {
             if (ModelState.IsValid)
-            {
+            { 
+                employee.IdentityUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["IdentityUserId"] = new SelectList(_context.Users, "Id", "Id", employee.IdentityUserId);
             return RedirectToAction("Index");
-            //return View(employee);
         }
 
         // GET: Employees/Edit/5
