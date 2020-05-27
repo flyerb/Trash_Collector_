@@ -170,5 +170,7 @@ namespace Trash_Collector.Controllers
         {
             return _context.Customers.Any(e => e.CustomerId == id);
         }
+
+      
     }
 }
