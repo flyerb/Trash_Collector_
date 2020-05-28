@@ -65,12 +65,14 @@
 
 
             <div class="form-group"> 
-                <label asp-for="extraPickup" class="control-label"></label>
+                We are happy to offer an additional pick up (up to 4 times a month!) for only $10 each additional pickup.<br />
+               <br /> <label asp-for="extraPickup" class="control-label"></label>
                 <input asp-for="extraPickup" class="form-control" />
                 <span asp-validation-for="extraPickup" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="suspendPickupStart" class="control-label"></label>
+                Going on vacation? Don't forget to suspend your service while you're away!<br />
+                <br /><label asp-for="suspendPickupStart" class="control-label"></label>
                 <input asp-for="suspendPickupStart" class="form-control" />
                 <span asp-validation-for="suspendPickupStart" class="text-danger"></span>
             </div>

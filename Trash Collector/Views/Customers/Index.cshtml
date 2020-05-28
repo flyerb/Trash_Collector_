@@ -82,9 +82,9 @@
             @Html.DisplayFor(modelItem => item.IdentityUser.Id)
         </td>*@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Update Information</a> |
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Request Additional Pick Up</a> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerId">Cancel Service</a>
+                <a asp-action="Edit" asp-route-id="@item.CustomerId">| Update Information</a> <br />|
+                <a asp-action="Edit" asp-route-id="@item.CustomerId">Request An Additional Pick Up</a><br /> |
+                <a asp-action="Delete" asp-route-id="@item.CustomerId">Cancel Service</a><br /> 
             </td>
         </tr>
 }
