@@ -9,7 +9,18 @@
 <h1>Good morning! Today's pick ups </h1>
 
 <p>
-    <a asp-action="Create">Do I need this button for anything?</a>
+    To See your pick ups for the week, select a day from the drop down list:
+    <div class="form-group">
+        @*<label asp-for="" class="control-label"></label>*@
+        <select data-val="true" data-val-required="The Person field is required." id="Person" name="Person">
+            <option value="">Pick one</option>
+            <option value="1">Monday</option>
+            <option value="2">Tuesday</option>
+            <option value="3">Wednesday</option>
+            <option value="4">Thursday</option>
+        </select>
+        @*<span asp-validation-for="weeklyPickupDay" class="text-danger"></span>*@
+    </div>
 </p>
 <table class="table">
     <thead>

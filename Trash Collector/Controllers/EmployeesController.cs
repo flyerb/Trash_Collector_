@@ -184,8 +184,8 @@ namespace Trash_Collector.Controllers
 
         public IActionResult CompletePickUp(int id)
         {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.CustomerId == id).SingleOrDefault();
 
             customer.pickUpComplete = true;
             customer.invoice += 20;
