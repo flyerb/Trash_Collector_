@@ -182,12 +182,14 @@ namespace Trash_Collector.Controllers
             return _context.Employees.Any(e => e.EmployeeId == id);
         }
 
-        public void CompletePickUp(int id)
+        public IActionResult CompletePickUp(int id)
         {
-            var customer = _context.Customers.Where(c => c.CustomerId == id).FirstOrDefault();
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
 
             customer.pickUpComplete = true;
             customer.invoice += 20;
+            return View();
 
         }
 

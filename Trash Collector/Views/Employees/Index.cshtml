@@ -44,12 +44,12 @@
             </td>
             <td>
                 @Html.DisplayNameFor(model => model.pickUpComplete)
-            <input id="Checkbox1" type="checkbox" />
+                <input id="Checkbox1" type="checkbox" />
+
+                <a asp-action="CompletePickUp" asp-route-id="@item.CustomerId">Click here to confirm Pick Up</a>
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.CustomerId">This is where the silly map will go</a> |
-                <a asp-action="CompletePickUp" asp-route-id="@item.CustomerId">Click here to confirm Pick Up</a>
-
+            <a asp-action="Details" asp-route-id="@item.CustomerId">Map</a> |
             </td>
         </tr>
 }
