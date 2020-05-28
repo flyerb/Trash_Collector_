@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Trash_Collector.Data;
 
 namespace Trash_Collector.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200528014621_dayTimeToDaysOfWeek")]
+    partial class dayTimeToDaysOfWeek
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace Trash_Collector.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "eefc7139-1520-4173-9f55-925d633f9b44",
-                            ConcurrencyStamp = "cf68092f-d0b6-4c89-9590-474f1f80f906",
+                            Id = "549e23fa-6987-4187-9656-3ed7009f4869",
+                            ConcurrencyStamp = "94cecf11-c430-4dc7-b54e-6a08d1d6da3c",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "cc14fb7b-ef0b-4385-8dc2-e5aa9b6aabb8",
-                            ConcurrencyStamp = "b949db19-772f-4b8c-8d6a-dbd900ccf117",
+                            Id = "de29f003-251f-4284-87a6-1bab13eea8ea",
+                            ConcurrencyStamp = "c5b62327-d994-46a8-9fe3-73fab9b25d79",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -265,8 +267,8 @@ namespace Trash_Collector.Data.Migrations
                     b.Property<DateTime>("suspendPickupStart")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("weeklyPickupDay")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("weeklyPickupDay")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("zipCode")
                         .HasColumnType("int");

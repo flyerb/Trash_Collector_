@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using GoogleApi.Entities.Places.Details.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -39,8 +40,9 @@ namespace Trash_Collector.Controllers
             {
                 return RedirectToAction("Create");
             }
-           
-            var customerZip = _context.Customers.Where(z => z.zipCode ==  employee.zipCode);
+
+            var customerZip = _context.Customers.Where(z => z.zipCode == employee.zipCode);
+                //&& z.weeklyPickupDay == DateTime.Now.d);
             return View(customerZip.ToList());
 
             // var applicationDbContext = _context.Employees.Where(c => c.IdentityUserId == userId);
@@ -124,6 +126,7 @@ namespace Trash_Collector.Controllers
             {
                 try
                 {
+                    
                     _context.Update(employee);
                     await _context.SaveChangesAsync();
                 }
@@ -178,5 +181,16 @@ namespace Trash_Collector.Controllers
         {
             return _context.Employees.Any(e => e.EmployeeId == id);
         }
+
+        public void CompletePickUp(int id)
+        {
+            var customer = _context.Customers.Where(c => c.CustomerId == id).FirstOrDefault();
+
+            customer.pickUpComplete = true;
+            customer.invoice += 20;
+
+        }
+
     }
+
 }

@@ -38,49 +38,61 @@
             </div>
 
             @*<div class="form-group">
-                    <label asp-for="Input.Role"></label>
-                    <select asp-for="Input.Role" class="form-control" aspitems="@Model.Roles"></select>
-                    <span asp-validation-for="Input.Role" class="text-danger"></span>
-                </div>
+            <label asp-for="Input.Role"></label>
+            <select asp-for="Input.Role" class="form-control" aspitems="@Model.Roles"></select>
+            <span asp-validation-for="Input.Role" class="text-danger"></span>
+        </div>
 
-                "control-label"*@
+        "control-label"*@
 
             <div class="form-group">
-                <label asp-for="weeklyPickupDay" class="form-control"></label>
-                <input asp-for="weeklyPickupDay" class="form-control" />
+                <label asp-for="weeklyPickupDay" class="control-label"></label>
+                <select data-val="true" data-val-required="The Pickup field is required." id="Pickup" name="Pickup">
+                    <option value="">Pick one</option>
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option selected="selected" value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                </select>
                 <span asp-validation-for="weeklyPickupDay" class="text-danger"></span>
             </div>
 
+            @*<div class="form-group">
+                <label asp-for="weeklyPickupDay" class="form-control"></label>
+                <input asp-for="weeklyPickupDay" class="form-control" />
+                <span asp-validation-for="weeklyPickupDay" class="text-danger"></span>
+            </div>*@
 
-    <div class="form-group">
-        <label asp-for="extraPickup" class="control-label"></label>
-        <input asp-for="extraPickup" class="form-control" />
-        <span asp-validation-for="extraPickup" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="suspendPickupStart" class="control-label"></label>
-        <input asp-for="suspendPickupStart" class="form-control" />
-        <span asp-validation-for="suspendPickupStart" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="suspendPickupEnd" class="control-label"></label>
-        <input asp-for="suspendPickupEnd" class="form-control" />
-        <span asp-validation-for="suspendPickupEnd" class="text-danger"></span>
-    </div>
-    @*<div class="form-group">
+
+            <div class="form-group"> 
+                <label asp-for="extraPickup" class="control-label"></label>
+                <input asp-for="extraPickup" class="form-control" />
+                <span asp-validation-for="extraPickup" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="suspendPickupStart" class="control-label"></label>
+                <input asp-for="suspendPickupStart" class="form-control" />
+                <span asp-validation-for="suspendPickupStart" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="suspendPickupEnd" class="control-label"></label>
+                <input asp-for="suspendPickupEnd" class="form-control" />
+                <span asp-validation-for="suspendPickupEnd" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
             <label asp-for="invoice" class="control-label"></label>
             <input asp-for="invoice" class="form-control" />
             <span asp-validation-for="invoice" class="text-danger"></span>
         </div>*@
-    @*<div class="form-group">
+            @*<div class="form-group">
             <label asp-for="IdentityUserId" class="control-label"></label>
             <select asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.IdentityUserId"></select>
             <span asp-validation-for="IdentityUserId" class="text-danger"></span>
         </div>*@
-    <div class="form-group">
-        <input type="submit" value="Save" class="btn btn-primary" />
-    </div>
-    </form>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
 </div>
 </div>
 
