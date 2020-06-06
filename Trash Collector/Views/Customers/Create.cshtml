@@ -53,12 +53,12 @@
 
             <div class="form-group">
                 <label asp-for="weeklyPickupDay" class="control-label"></label>
-                <select data-val="true" data-val-required="The Person field is required." id="Person" name="Person">
+                <select asp-for="weeklyPickupDay"  data-val="true" data-val-required="The Person field is required." id="Person" name="Person">
                     <option value="">Pick one</option>
-                    <option value="1">Monday</option>
-                    <option value="2">Tuesday</option>
-                    <option value="3">Wednesday</option>
-                    <option value="4">Thursday</option>
+                    <option asp-for="weeklyPickupDay" value="Monday">Monday</option>
+                    <option asp-for="weeklyPickupDay" value="Tuesday">Tuesday</option>
+                    <option asp-for="weeklyPickupDay" value="Wednesday">Wednesday</option>
+                    <option asp-for="weeklyPickupDay" value="Thursday">Thursday</option>
                 </select>
                 <span asp-validation-for="weeklyPickupDay" class="text-danger"></span>
             </div>

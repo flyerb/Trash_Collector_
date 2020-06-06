@@ -27,15 +27,17 @@ namespace Trash_Collector.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var customer = _context.Customers.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+        
 
             if (customer == null)
             {
                 return RedirectToAction("Create");
             }
-           // _context.Customers.Include(c => c.IdentityUser);
-
-           var applicationDbContext = _context.Customers.Where(c => c.IdentityUserId == userId);
+            var applicationDbContext = _context.Customers.Where(c => c.IdentityUserId == userId);
             return View(await applicationDbContext.ToListAsync());
+            
+           //var applicationDbContext = _context.Customers.Where(c => c.IdentityUserId == userId);
+            
         }
 
         // GET: Customers/Details/5
