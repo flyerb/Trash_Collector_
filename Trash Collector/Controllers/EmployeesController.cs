@@ -35,18 +35,18 @@ namespace Trash_Collector.Controllers
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employee = _context.Employees.Where(c => c.IdentityUserId == userId).SingleOrDefault();
+            string dayofWeek = DateTime.Now.DayOfWeek.ToString();
 
             if (employee == null)
             {
                 return RedirectToAction("Create");
             }
 
-            var customerZip = _context.Customers.Where(z => z.zipCode == employee.zipCode);
-                //&& z.weeklyPickupDay == DateTime.Now.d);
+            var customerZip = _context.Customers.Where(z => z.zipCode == employee.zipCode && z.weeklyPickupDay == dayofWeek).ToList();
             return View(customerZip.ToList());
 
-            // var applicationDbContext = _context.Employees.Where(c => c.IdentityUserId == userId);
-            // return View(applicationDbContext.ToList());
+            //here is where we need to filter out the people who have suspended pick up.
+
         }
 
         // GET: Employees/Details/5
@@ -59,7 +59,7 @@ namespace Trash_Collector.Controllers
 
             var employee = await _context.Employees
                 .Include(e => e.IdentityUser)
-                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+                .FirstOrDefaultAsync(m => m.employeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -117,7 +117,7 @@ namespace Trash_Collector.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,firstName,lastName,zipCode,IdentityUserId")] Employee employee)
         {
-            if (id != employee.EmployeeId)
+            if (id != employee.employeeId)
             {
                 return NotFound();
             }
@@ -132,7 +132,7 @@ namespace Trash_Collector.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.EmployeeId))
+                    if (!EmployeeExists(employee.employeeId))
                     {
                         return NotFound();
                     }
@@ -157,7 +157,7 @@ namespace Trash_Collector.Controllers
 
             var employee = await _context.Employees
                 .Include(e => e.IdentityUser)
-                .FirstOrDefaultAsync(m => m.EmployeeId == id);
+                .FirstOrDefaultAsync(m => m.employeeId == id);
             if (employee == null)
             {
                 return NotFound();
@@ -179,16 +179,17 @@ namespace Trash_Collector.Controllers
 
         private bool EmployeeExists(int id)
         {
-            return _context.Employees.Any(e => e.EmployeeId == id);
+            return _context.Employees.Any(e => e.employeeId == id);
         }
 
         public IActionResult CompletePickUp(int id)
         {
             //var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var customer = _context.Customers.Where(c => c.CustomerId == id).SingleOrDefault();
+            var customer = _context.Customers.Where(c => c.customerId == id).SingleOrDefault();
 
             customer.pickUpComplete = true;
             customer.invoice += 20;
+            _context.SaveChanges();
             return View();
 
         }

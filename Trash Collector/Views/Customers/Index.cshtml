@@ -25,9 +25,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.zipCode)
             </th>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.weeklyPickupDay)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.invoice)
             </th>
@@ -82,9 +82,9 @@
             @Html.DisplayFor(modelItem => item.IdentityUser.Id)
         </td>*@
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">| Update Information</a> <br />|
-                <a asp-action="Edit" asp-route-id="@item.CustomerId">Request An Additional Pick Up</a><br /> |
-                <a asp-action="Delete" asp-route-id="@item.CustomerId">Cancel Service</a><br /> 
+                <a asp-action="Edit" asp-route-id="@item.customerId">| Update Information</a> <br />|
+                <a asp-action="Edit" asp-route-id="@item.customerId">Request An Additional Pick Up</a><br /> |
+                <a asp-action="Delete" asp-route-id="@item.customerId">Cancel Service</a><br /> 
             </td>
         </tr>
 }

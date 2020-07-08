@@ -11,7 +11,7 @@ namespace Trash_Collector.Models
 {
     public class Customer
     {
-        public int CustomerId { get; set; }
+        public int customerId { get; set; }
         [Display(Name ="First Name")]
         public string firstName { get; set; }
 
@@ -48,15 +48,6 @@ namespace Trash_Collector.Models
         public string IdentityUserId { get; set; }
         public IdentityUser IdentityUser { get; set; }
 
-        //public Customer()
-        //{
-        //    weeklyPickupDay = new List<SelectListItem> {
-        //new SelectListItem { Value = "1", Text = "Monday" },
-        //new SelectListItem { Value = "2", Text = "Tuesday" },
-        //new SelectListItem { Value = "3", Text = "Wednesday" },
-        //new SelectListItem { Value = "4", Text = "Thursday" }
-        //};
-        //}
         
 
     }

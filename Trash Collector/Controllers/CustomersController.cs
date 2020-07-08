@@ -35,8 +35,7 @@ namespace Trash_Collector.Controllers
             }
             var applicationDbContext = _context.Customers.Where(c => c.IdentityUserId == userId);
             return View(await applicationDbContext.ToListAsync());
-            
-           //var applicationDbContext = _context.Customers.Where(c => c.IdentityUserId == userId);
+            //I dont know why it has to be this way, but it does? Ask question after async lecture
             
         }
 
@@ -71,7 +70,8 @@ namespace Trash_Collector.Controllers
          
             if (ModelState.IsValid)
             {
-                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier); 
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+             
                 customer.IdentityUserId = userId; 
                 _context.Add(customer);
                 _context.SaveChanges();
@@ -123,7 +123,7 @@ namespace Trash_Collector.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.CustomerId))
+                    if (!CustomerExists(customer.customerId))
                     {
                         return NotFound();
                     }
@@ -148,7 +148,7 @@ namespace Trash_Collector.Controllers
 
             var customer = await _context.Customers
                 .Include(c => c.IdentityUser)
-                .FirstOrDefaultAsync(m => m.CustomerId == id);
+                .FirstOrDefaultAsync(m => m.customerId == id);
             if (customer == null)
             {
                 return NotFound();
@@ -170,7 +170,7 @@ namespace Trash_Collector.Controllers
 
         private bool CustomerExists(int id)
         {
-            return _context.Customers.Any(e => e.CustomerId == id);
+            return _context.Customers.Any(e => e.customerId == id);
         }
 
       
