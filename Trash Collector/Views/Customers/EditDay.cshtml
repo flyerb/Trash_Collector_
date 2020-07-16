@@ -13,30 +13,42 @@
         <form asp-action="EditDay">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="customerId" />
+            @*<div class="form-group">
+            <label asp-for="firstName" class="control-label"></label>
+            <input asp-for="firstName" class="form-control" />
+            <span asp-validation-for="firstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="lastName" class="control-label"></label>
+            <input asp-for="lastName" class="form-control" />
+            <span asp-validation-for="lastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="streetAddress" class="control-label"></label>
+            <input asp-for="streetAddress" class="form-control" />
+            <span asp-validation-for="streetAddress" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="zipCode" class="control-label"></label>
+            <input asp-for="zipCode" class="form-control" />
+            <span asp-validation-for="zipCode" class="text-danger"></span>
+        </div>
+        <div class="form-group form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" asp-for="pickUpComplete" /> @Html.DisplayNameFor(model => model.pickUpComplete)
+            </label>
+        </div>*@
             <div class="form-group">
-                <label asp-for="firstName" class="control-label"></label>
-                <input asp-for="firstName" class="form-control" />
-                <span asp-validation-for="firstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="lastName" class="control-label"></label>
-                <input asp-for="lastName" class="form-control" />
-                <span asp-validation-for="lastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="streetAddress" class="control-label"></label>
-                <input asp-for="streetAddress" class="form-control" />
-                <span asp-validation-for="streetAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="zipCode" class="control-label"></label>
-                <input asp-for="zipCode" class="form-control" />
-                <span asp-validation-for="zipCode" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="pickUpComplete" /> @Html.DisplayNameFor(model => model.pickUpComplete)
-                </label>
+                Your weekly pick up day is:<br />
+                <br /><label asp-for="weeklyPickupDay" class="control-label"></label>
+                <select asp-for="weeklyPickupDay" data-val="true" data-val-required="The Pickup field is required." id="Pickup" name="Pickup">
+                    <option asp-for="weeklyPickupDay" value="">Pick one</option>
+                    <option asp-for="weeklyPickupDay" value="Monday">Monday</option>
+                    <option asp-for="weeklyPickupDay" value="Tuesday">Tuesday</option>
+                    <option asp-for="weeklyPickupDay" value="Wednesday">Wednesday</option>
+                    <option asp-for="weeklyPickupDay" value="Thursday">Thursday</option>
+                </select>
+                <span asp-validation-for="weeklyPickupDay" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="weeklyPickupDay" class="control-label"></label>
@@ -63,11 +75,11 @@
                 <input asp-for="invoice" class="form-control" />
                 <span asp-validation-for="invoice" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IdentityUserId" class="control-label"></label>
-                <select asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.IdentityUserId"></select>
-                <span asp-validation-for="IdentityUserId" class="text-danger"></span>
-            </div>
+            @*<div class="form-group">
+            <label asp-for="IdentityUserId" class="control-label"></label>
+            <select asp-for="IdentityUserId" class="form-control" asp-items="ViewBag.IdentityUserId"></select>
+            <span asp-validation-for="IdentityUserId" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

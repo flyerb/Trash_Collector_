@@ -48,18 +48,7 @@
 
             *@
 
-            <div class="form-group">
-                Your weekly pick up day is:<br />
-                <br /><label asp-for="weeklyPickupDay" class="control-label"></label>
-                <select asp-for="weeklyPickupDay"  data-val="true" data-val-required="The Pickup field is required." id="Pickup" name="Pickup">
-                    <option asp-for="weeklyPickupDay" value="">Pick one</option>
-                    <option asp-for="weeklyPickupDay" value="Monday">Monday</option>
-                    <option asp-for="weeklyPickupDay" value="Tuesday">Tuesday</option>
-                    <option asp-for="weeklyPickupDay" value="Wednesday">Wednesday</option>
-                    <option asp-for="weeklyPickupDay" value="Thursday">Thursday</option>
-                </select>
-                <span asp-validation-for="weeklyPickupDay" class="text-danger"></span>
-            </div>
+       
 
             @*<div class="form-group">
             <label asp-for="weeklyPickupDay" class="form-control"></label>
@@ -68,7 +57,7 @@
         </div>*@
 
 
-            <div class="form-group">
+            @*<div class="form-group">
                 We are happy to offer an additional pick up (up to 4 times a month!) for only $10 each additional pickup.<br />
                 <br /> <label asp-for="extraPickup" class="control-label"></label>
                 <input asp-for="extraPickup" class="form-control" />
@@ -84,7 +73,7 @@
                 <label asp-for="suspendPickupEnd" class="control-label"></label>
                 <input asp-for="suspendPickupEnd" class="form-control" />
                 <span asp-validation-for="suspendPickupEnd" class="text-danger"></span>
-            </div>
+            </div>*@
             @*<div class="form-group">
             <label asp-for="invoice" class="control-label"></label>
             <input asp-for="invoice" class="form-control" />
